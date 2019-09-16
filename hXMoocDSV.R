@@ -129,3 +129,39 @@ observed_quantiles <- quantile(z, p)
 theoretical_quantiles <- qnorm(p) 
 plot(theoretical_quantiles, observed_quantiles)
 abline(0,1)
+
+library(HistData)
+data(Galton)
+x <- Galton$child
+
+#Compute the average and median of these data. Note: do not assign them to a variable.
+mean(x)
+median(x)
+
+#Compute the standard deviation and the median absolute deviation of these data.
+
+sd(x)
+mad(x)
+
+x_with_error <- x
+x_with_error[1] <- x_with_error[1]*10
+(mean(x_with_error) - mean(x))
+sd(x_with_error)  - sd(x)
+median(x_with_error) - median(x)
+mad(x_with_error) - mad(x)
+
+#Write a function called error_avg that takes a value k and returns the average of the vector x after the first entry changed to k. Show the results for k=10000 and k=-10000.
+
+x <- Galton$child
+error_avg <- function(k){
+  x_with_error <- x
+  x_with_error[1] <- k
+  mean(x_with_error)
+}
+
+error_avg(10000)
+error_avg(-10000)
+
+
+
+
