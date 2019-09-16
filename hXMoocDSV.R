@@ -51,3 +51,57 @@ z <- scale(x)
 # calculate proportion of values within 2 SD of mean
 mean(abs(z) < 2)
 
+x <- heights$height[heights$sex == "Male"]
+mean(x > 69 & x <=72)
+
+#Use the normal approximation to estimate the proportion the proportion of the data that is between 69 and 72 inches.
+x <- heights$height[heights$sex=="Male"]
+avg <- mean(x)
+stdev <- sd(x)
+#Given a normal distribution with a mean mu and standard deviation sigma, you can calculate the proportion of observations less than or equal to a certain value with pnorm(value, mu, sigma).
+(pnorm(72, avg, stdev) - pnorm(69, avg, stdev))
+
+x <- heights$height[heights$sex == "Male"]
+exact <- mean(x > 79 & x <= 81)
+
+#Use normal approximation to estimate the proportion of heights between 79 and 81 inches and save it in an object called approx.
+avg <- mean(x)
+stdev <- sd(x)
+
+approx <- pnorm(81, avg, stdev) - pnorm(79, avg, stdev)
+#Report how many times bigger the actual proportion is compared to the approximation.
+(exact/approx)
+
+# use pnorm to calculate the proportion over 7 feet (7*12 inches)
+#Using the normal approximation, estimate the proportion of adult men that are taller than 7 feet, referred to as seven footers. Remember that 1 foot equals 12 inches.
+#Use the pnorm function. Note that pnorm finds the proportion less than or equal to a given value, but you are asked to find the proportion greater than that value.
+#Print out your estimate; don't store it in an object.
+avg <- 69
+stdev <- 3
+
+ 1 - pnorm(7 * 12, avg, stdev)
+
+#Use your answer to the previous exercise to estimate the proportion of men that are seven feet tall or taller in the world and store that value as p.
+#Then multiply this value by 1 billion (10^9) round the number of 18-40 year old men who are seven feet tall or taller to the nearest integer with round. (Do not store this value in an object.)
+avg <- 69
+stdev <- 3
+
+ (round((1 - pnorm(7 * 12, avg, stdev)) * 10**9))
+
+#There are about 10 National Basketball Association (NBA) players that are 7 feet tall or higher.
+
+#Use your answer to exercise 4 to estimate the proportion of men that are seven feet tall or taller in the world and store that value as p.
+#Use your answer to the previous exercise (exercise 5) to round the number of 18-40 year old men who are seven feet tall or taller to the nearest integer and store that value as N.
+#Then calculate the proportion of the world's 18 to 40 year old seven footers that are in the NBA. (Do not store this value in an object.)
+avg <- 69
+stdev <- 3
+
+N<- 1 - pnorm(7 * 12, avg, stdev)
+p <- round((1 - pnorm(7 * 12, avg, stdev)) * 10**9)
+
+ (10 / N)
+
+## Repeat the calculations performed in the previous question for Lebron James' height: 6 feet 8 inches. There are about 150 players, instead of 10, that are at least that tall in the NBA.
+p <- 1 - pnorm(6*12 + 8, 69, 3)
+N <- round(p * 10^9)
+150/N
