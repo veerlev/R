@@ -364,3 +364,70 @@ p3 <- p + geom_histogram(binwidth = 3, fill = "blue", col = "black")
 # arrange plots next to each other in 1 row, 3 columns
 library(gridExtra)
 grid.arrange(p1, p2, p3, ncol = 3)
+
+library(dplyr)
+library(ggplot2)
+library(dslabs)
+data(heights)
+data(murders)
+p <- ggplot(murders)
+class(p)
+           
+(p <- ggplot(murders))           
+
+ data(heights)
+# define ggplot object called p like in the previous exercise but using a pipe
+(p <- heights %>% ggplot())
+           
+ murders %>% ggplot(aes(x = population, y = total)) +
+  geom_point()
+           
+  library(dplyr)
+library(ggplot2)
+library(dslabs)
+data(murders)
+## edit the next line to add the label
+murders %>% ggplot(aes(population, total, label=abb)) +
+  geom_label()
+           
+ murders %>% ggplot(aes(population, total,label= abb)) +
+  geom_label(color="blue")
+       
+ murders %>% ggplot(aes(population, total, label = abb, color=region)) +
+  geom_label()
+           
+  ## add layers to p here
+(p + scale_x_log10 + scale_y_log10)
+           
+ p <- murders %>% ggplot(aes(population, total, label = abb, color = region)) +
+  geom_label()
+p + scale_x_log10() + 
+    scale_y_log10() + 
+# add a layer to add title to the next line
+  ggtitle("Gun murder data")
+           
+ p <- heights %>% ggplot(aes(height))
+ 
+ p <- heights %>% 
+  ggplot(aes(height))
+## add a layer to p
+(p + geom_histogram(binwidth=1))
+   heights %>% 
+  ggplot(aes(height)) +
+   geom_density()        
+
+           ## add the group argument then a layer with +
+heights %>% 
+  ggplot(aes(x=height, group=sex)) +
+  geom_density()
+           
+           
+  ## edit the next line to use color instead of group then add a density layer
+heights %>% 
+  ggplot(aes(height, color = sex)) + 
+  geom_density()
+           
+  heights %>% 
+  ggplot(aes(height, fill = sex)) + 
+  geom_density(alpha=0.2)
+  
